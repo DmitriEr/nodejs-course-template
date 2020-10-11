@@ -1,29 +1,47 @@
 const User = require('../resources/users/user.model');
+const Board = require('../resources/boards/board.model');
 
-const DB = [];
+const DB = {
+  Users: [],
+  Boards: []
+};
 
-DB.push(new User(), new User(), new User());
+DB.Users.push(new User(), new User(), new User());
 
 const getAllUsers = async () => {
-  return DB.slice(0);
+  return DB.Users.slice(0);
 };
 
 const getUser = async id => {
-  return DB.filter(el => el.id === id)[0];
+  return DB.Users.filter(el => el.id === id)[0];
 };
 
 const createUser = async user => {
-  DB.push(user);
+  DB.Users.push(user);
   return user;
 };
 
 const updateUser = async id => {
-  const user = DB.filter(el => el.id === id)[0];
-  return user;
+  return DB.Users.filter(el => el.id === id)[0];
 };
 
 const removeUser = async id => {
-  return DB.filter(el => el.id !== id);
+  return DB.Users.filter(el => el.id !== id);
 };
 
-module.exports = { getAllUsers, getUser, createUser, updateUser, removeUser };
+// boards
+
+DB.Boards.push(new Board(), new Board(), new Board());
+
+const getAllBoards = async () => {
+  return DB.Boards;
+};
+
+module.exports = {
+  getAllUsers,
+  getUser,
+  createUser,
+  updateUser,
+  removeUser,
+  getAllBoards
+};
