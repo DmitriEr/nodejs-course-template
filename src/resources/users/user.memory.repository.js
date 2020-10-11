@@ -22,4 +22,9 @@ const update = async id => {
   return DB.updateUser(id);
 };
 
-module.exports = { getAll, get, create, update };
+const remove = async id => {
+  const users = await DB.removeUser(id);
+  return users;
+};
+
+module.exports = { getAll, get, create, update, remove };

@@ -19,8 +19,11 @@ const createUser = async user => {
 
 const updateUser = async id => {
   const user = DB.filter(el => el.id === id)[0];
-  user.name = 'Autotest updated TEST_USER';
   return user;
 };
 
-module.exports = { getAllUsers, getUser, createUser, updateUser };
+const removeUser = async id => {
+  return DB.filter(el => el.id !== id);
+};
+
+module.exports = { getAllUsers, getUser, createUser, updateUser, removeUser };
