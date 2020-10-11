@@ -37,11 +37,32 @@ const getAllBoards = async () => {
   return DB.Boards;
 };
 
+const getBoard = async id => {
+  return DB.Boards.filter(el => el.id === id)[0];
+};
+
+const createBoard = async board => {
+  DB.Boards.push(board);
+  return board;
+};
+
+const updateBoard = async id => {
+  return DB.Boards.filter(el => el.id === id)[0];
+};
+
+const removeBoard = async id => {
+  return await DB.Boards.filter(el => el.id !== id);
+};
+
 module.exports = {
   getAllUsers,
   getUser,
   createUser,
   updateUser,
   removeUser,
-  getAllBoards
+  getAllBoards,
+  getBoard,
+  createBoard,
+  updateBoard,
+  removeBoard
 };
