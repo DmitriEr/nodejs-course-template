@@ -12,7 +12,7 @@ router.route('/').get(async (req, res) => {
   }
 });
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:boardId').get(async (req, res) => {
   try {
     const board = await boardsService.get(req.params.id);
     res.status(200).send(Board.toResponse(board));
@@ -38,7 +38,7 @@ router.route('/').post(async (req, res) => {
   }
 });
 
-router.route('/:id').put(async (req, res) => {
+router.route('/:boardId').put(async (req, res) => {
   try {
     const board = await boardsService.update(req.params.id);
     board.title = req.body.title;
@@ -49,7 +49,7 @@ router.route('/:id').put(async (req, res) => {
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
+router.route('/:boardId').delete(async (req, res) => {
   try {
     await boardsService.remove(req.params.id);
     res.sendStatus(204);

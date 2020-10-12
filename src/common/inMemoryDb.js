@@ -1,9 +1,11 @@
 const User = require('../resources/users/user.model');
 const Board = require('../resources/boards/board.model');
+const Task = require('../resources/tasks/task.model');
 
 const DB = {
   Users: [],
-  Boards: []
+  Boards: [],
+  Tasks: []
 };
 
 DB.Users.push(new User(), new User(), new User());
@@ -54,6 +56,14 @@ const removeBoard = async id => {
   return await DB.Boards.filter(el => el.id !== id);
 };
 
+// tasks
+
+DB.Tasks.push(new Task(), new Task(), new Task());
+
+const getAllTasks = async () => {
+  return DB.Tasks.slice(0);
+};
+
 module.exports = {
   getAllUsers,
   getUser,
@@ -64,5 +74,6 @@ module.exports = {
   getBoard,
   createBoard,
   updateBoard,
-  removeBoard
+  removeBoard,
+  getAllTasks
 };
