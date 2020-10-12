@@ -1,17 +1,19 @@
-const User = require('../resources/users/user.model');
-const Board = require('../resources/boards/board.model');
-const Task = require('../resources/tasks/task.model');
-
 const DB = {
   Users: [],
   Boards: [],
   Tasks: []
 };
 
-DB.Users.push(new User(), new User(), new User());
-
 const getAllUsers = async () => {
   return DB.Users.slice(0);
+};
+
+const getAllBoards = async () => {
+  return DB.Boards.slice(0);
+};
+
+const getAllTasks = async id => {
+  return DB.Tasks.filter(el => el.boardId === id);
 };
 
 const getUser = async id => {
@@ -28,15 +30,10 @@ const updateUser = async id => {
 };
 
 const removeUser = async id => {
-  return DB.Users.filter(el => el.id !== id);
-};
-
-// boards
-
-DB.Boards.push(new Board(), new Board(), new Board());
-
-const getAllBoards = async () => {
-  return DB.Boards;
+  DB.Tasks.map(task => {
+    return id !== task.userId ? { ...test, userId: null } : task;
+  });
+  return await DB.Users.filter(el => el.id !== id);
 };
 
 const getBoard = async id => {
@@ -53,15 +50,22 @@ const updateBoard = async id => {
 };
 
 const removeBoard = async id => {
-  return await DB.Boards.filter(el => el.id !== id);
+  return DB.Boards.filter(el => el.id !== id);
 };
 
-// tasks
+const getTask = async (id, taskId) => {
+  const task = DB.Tasks.filter(el => el.boardId === id);
+  return task.filter(el => el.id === taskId)[0];
+};
 
-DB.Tasks.push(new Task(), new Task(), new Task());
+const createTask = async task => {
+  DB.Tasks.push(task);
+  return task;
+};
 
-const getAllTasks = async () => {
-  return DB.Tasks.slice(0);
+const removeTask = async (id, taskId) => {
+  const tasks = DB.Tasks.filter(el => el.id === id);
+  return tasks.filter(el => el.id !== taskId);
 };
 
 module.exports = {
@@ -75,5 +79,8 @@ module.exports = {
   createBoard,
   updateBoard,
   removeBoard,
-  getAllTasks
+  getAllTasks,
+  getTask,
+  createTask,
+  removeTask
 };
